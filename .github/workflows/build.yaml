@@ -58,3 +58,4 @@ jobs:
       env:
         USERNAME: ${{ secrets.anypoint_platform_username }}
         PASSWORD: ${{ secrets.anypoint_platform_password }}
+      run: mvn -B package --file pom.xml
