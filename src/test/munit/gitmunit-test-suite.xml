@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="gitmunit-test-suite.xml" />
+	<munit:test name="gitmunit-test-suite-gitmunitFlowTest" doc:id="633c6e2b-d781-4a54-b0f9-ba2ebe0806e6" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to gitmunitFlow" doc:id="f0a7937a-f678-4b76-8b10-00d363e21294" name="gitmunitFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Payload Assert equals" doc:id="2e9a9643-9558-4d17-a98b-fb6bf8e7492f" actual="#[payload]" expected='#[{&#10;	"sucesso":"true"&#10;}]'/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
