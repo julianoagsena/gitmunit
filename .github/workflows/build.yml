@@ -31,7 +31,7 @@ jobs:
         KEY: ${{ secrets.decryption_key }}
       run: mvn test --settings .maven/settings.xml -Dsecure.key="$KEY"
     - name: Upload MUnit reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: munit-test-reports
         path: target/site/munit/coverage/
@@ -63,7 +63,7 @@ jobs:
         artifactName2=$(ls target/*.jar | head -1 | sed "s/.jar/-$commitHash.jar/g")
         mv $artifactName1 $artifactName2
     - name: Upload artifact 
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
           name: artifacts
           path: target/*.jar
@@ -81,7 +81,7 @@ jobs:
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: artifacts
     - name: Deploy to Sandbox
@@ -89,10 +89,4 @@ jobs:
         USERNAME: ${{ secrets.anypoint_platform_username }}
         PASSWORD: ${{ secrets.anypoint_platform_password }}
         KEY: ${{ secrets.decryption_key }}
-      run: |
-        artifactName=$(ls *.jar | head -1)
-        mvn deploy -DskipMunitTests -DmuleDeploy \
-         -Dmule.artifact=$artifactName \
-         -Danypoint.username="$USERNAME" \
-         -Danypoint.password="$PASSWORD" \
-         -Ddecryption.key="$KEY"
+      run: mvn -B package --file pom.xml -DskipMunitTests
