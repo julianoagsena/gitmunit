@@ -30,25 +30,33 @@
 				<version>3.2.0</version>
 			</plugin>
 			<plugin>
-				<groupId>org.mule.tools.maven</groupId>
-				<artifactId>mule-maven-plugin</artifactId>
-				<version>${mule.maven.plugin.version}</version>
-				<extensions>true</extensions>
-                <configuration>
-                    <cloudHub2Deployment>true</cloudHub2Deployment>
-                    <target>CloudHub 2.0</target>
-                    <environment>Sandbox</environment>
-                    <region>us-east-1</region>
-                    <applicationName>gitmunit</applicationName>
-                    <runtimeVersion>${mule.runtime.version}</runtimeVersion>
-                    <workers>2</workers>
-                    <workerSize>0.2</workerSize>
-                    <replicas>2</replicas>
-                    <provider>CH2</provider>
-                    <autoRestart>true</autoRestart>
-                    <clientId>julianosenaptbr</clientId>
-                    <clientSecret>Santarem2010</clientSecret>
-                </configuration>
+			  <groupId>org.mule.tools.maven</groupId>
+			  <artifactId>mule-maven-plugin</artifactId>
+			  <version>3.7.1</version>
+			  <extensions>true</extensions>
+			  <configuration>
+			    <cloudhub2Deployment>
+			      <uri>https://anypoint.mulesoft.com</uri>
+			      <provider>MC</provider>
+			      <environment>Sandbox</environment>
+			      <target>Cloudhub-US-East-1</target>
+			      <muleVersion>4.9.0</muleVersion>
+			      <username>julianosenaptbr</username>
+			      <password>Santarem2010</password>
+			      <applicationName>gitmunit</applicationName>
+			      <replicas>1</replicas>
+			      <vCores>1</vCores>
+			      <deploymentSettings>
+			        <http>
+			          <inbound>
+			            <publicUrl>https://myapp.anypoint.com</publicUrl>
+			            <forwardSslSession>true</forwardSslSession>
+			            <lastMileSecurity>true</lastMileSecurity>
+			          </inbound>
+			        </http>
+			      </deploymentSettings>
+			    </cloudhub2Deployment>
+			  </configuration>
 			</plugin>
 		</plugins>
 	</build>
